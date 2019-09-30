@@ -4,17 +4,21 @@ import javax.servlet.ServletContext;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 public class DatabaseConnectionFactory extends AbstractFactory {
     @Override
     public Connection build() {
-        String dbURL = "jdbc:mysql://remotemysql.com:3306/";
-        String dbName = "8RWTedOitf";
-        String dbUsername = "8RWTedOitf";
-        String dbPassword = "weuczZX4mS";
+        ResourceBundle databaseResource = ResourceBundle.getBundle("db");
+
+        String dbURL = databaseResource.getString("db.url");
+        String dbName = databaseResource.getString("db.name");
+        String dbUsername = databaseResource.getString("db.user");
+        String dbPassword = databaseResource.getString("db.password");
+        String dbDriver = databaseResource.getString("db.driver");
 
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName(dbDriver);
 
             return DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword);
         } catch (Exception e) {
