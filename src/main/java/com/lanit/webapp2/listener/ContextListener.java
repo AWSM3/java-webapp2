@@ -2,9 +2,9 @@ package com.lanit.webapp2.listener;
 
 import com.lanit.webapp2.factory.DatabaseConnectionFactory;
 import com.lanit.webapp2.factory.FactoryInterface;
-import com.lanit.webapp2.factory.UserRepositoryFactory;
+import com.lanit.webapp2.factory.UserDaoFactory;
 import com.lanit.webapp2.mapper.UserDtoMapper;
-import com.lanit.webapp2.repository.UserRepositoryInterface;
+import com.lanit.webapp2.dao.UserDaoInterface;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -31,7 +31,7 @@ public class ContextListener implements ServletContextListener {
         /** коннект к бд */
         context.setAttribute(Connection.class.getSimpleName(), getFactory(DatabaseConnectionFactory.class, context).build());
         /** репозиторий юзеров */
-        context.setAttribute(UserRepositoryInterface.class.getSimpleName(), getFactory(UserRepositoryFactory.class, context).build());
+        context.setAttribute(UserDaoInterface.class.getSimpleName(), getFactory(UserDaoFactory.class, context).build());
         /** маппер */
         context.setAttribute(UserDtoMapper.class.getSimpleName(), new UserDtoMapper());
     }
