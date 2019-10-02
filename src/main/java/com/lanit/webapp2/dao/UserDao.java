@@ -6,6 +6,8 @@ import com.lanit.webapp2.exception.FailedToSaveUserException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.persistence.EntityManager;
+
 public class UserDao extends AbstractDao implements UserDaoInterface {
     @Override
     public User create(UserDto userDto) throws FailedToSaveUserException {
@@ -16,13 +18,19 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
     }
 
     protected void insertRow(User user) throws FailedToSaveUserException {
-        try (Session session = getSessionFactory().openSession();) {
-            Transaction transaction = null;
-            transaction = session.beginTransaction();
-            session.save(user);
-            transaction.commit();
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(user);
+            em.flush();
+            em.getTransaction().commit();
         } catch (Exception e) {
+            if(em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
             throw new FailedToSaveUserException("Неудача при попытке сохранения пользователя", e);
+        } finally {
+            em.close();
         }
     }
 }
