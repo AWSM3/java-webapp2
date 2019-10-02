@@ -1,15 +1,12 @@
 package com.lanit.webapp2.dao;
 
-import java.sql.Connection;
+import com.lanit.webapp2.util.Hibernate;
+import org.hibernate.SessionFactory;
 
 public class AbstractDao {
-    private Connection connection;
+    private SessionFactory sessionFactory;
 
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
+    public SessionFactory getSessionFactory() {
+        return Hibernate.getSessionFactory();
     }
 }
