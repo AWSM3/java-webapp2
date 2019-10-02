@@ -4,10 +4,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class Hibernate {
     private static final String PERSISTENCE_UNIT_NAME = "local-persistence";
+    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
     private static EntityManager entityManager;
 
@@ -17,7 +19,7 @@ public class Hibernate {
 
     private static EntityManager createEntityManager() {
         try {
-            return entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME).createEntityManager();
+            return entityManager = entityManagerFactory.createEntityManager();
         } catch (Exception e) {
             System.err.println(String.format("Ошибка при инициализации менеджера сущностей Hibernate: %s", e.getMessage()));
             throw new ExceptionInInitializerError(e);
