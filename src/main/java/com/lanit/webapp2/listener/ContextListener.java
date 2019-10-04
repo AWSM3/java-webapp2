@@ -3,6 +3,7 @@ package com.lanit.webapp2.listener;
 import com.lanit.webapp2.factory.DaoFactory;
 import com.lanit.webapp2.factory.DatabaseConnectionFactory;
 import com.lanit.webapp2.factory.FactoryInterface;
+import com.lanit.webapp2.mapper.AddressDtoMapper;
 import com.lanit.webapp2.mapper.UserDtoMapper;
 import com.lanit.webapp2.dao.UserDaoInterface;
 import com.lanit.webapp2.util.DatabaseMigration;
@@ -41,8 +42,10 @@ public class ContextListener implements ServletContextListener {
         context.setAttribute(Connection.class.getSimpleName(), getFactory(DatabaseConnectionFactory.class, context).build());
         /** dao фабрика */
         context.setAttribute(DaoFactory.class.getSimpleName(), getFactory(DaoFactory.class, context));
-        /** маппер */
+        /** маппер юзеров */
         context.setAttribute(UserDtoMapper.class.getSimpleName(), new UserDtoMapper());
+        /** маппер адресов */
+        context.setAttribute(AddressDtoMapper.class.getSimpleName(), new AddressDtoMapper());
     }
 
     private void setupDatabase() throws FileNotFoundException, SQLException {

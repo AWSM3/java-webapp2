@@ -20,9 +20,21 @@
         <servlet.version>3.1.0</servlet.version>
         <jsp-api.version>2.0</jsp-api.version>
         <junit.version>4.11</junit.version>
+        <jstl.version>1.2</jstl.version>
+        <mysql-connector.version>5.1.6</mysql-connector.version>
+        <hibernate-core.version>5.2.17.Final</hibernate-core.version>
+        <hibernate-entitymanager.version>5.0.12.Final</hibernate-entitymanager.version>
+        <jaxb-api.version>2.3.0</jaxb-api.version>
+        <jaxb-runtime.version>2.3.1</jaxb-runtime.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+
         <!-- Servlet Library -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -43,32 +55,31 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
+            <version>${mysql-connector.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.2.17.Final</version>
+            <version>${hibernate-core.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>5.0.12.Final</version>
+            <version>${hibernate-entitymanager.version}</version>
         </dependency>
 
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
+            <version>${jaxb-api.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
             <artifactId>jaxb-runtime</artifactId>
-            <version>2.3.1</version>
+            <version>${jaxb-runtime.version}</version>
         </dependency>
 
         <dependency>

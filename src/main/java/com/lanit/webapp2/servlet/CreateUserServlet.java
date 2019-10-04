@@ -31,9 +31,9 @@ public class CreateUserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             UserDto userDto = this.userDtoMapper.mapFromRequest(request);
-            UserDao dao = (UserDao) daoFactory.build(UserDao.class);
+            UserDao dao = daoFactory.build(UserDao.class);
             User createdUser = dao.create(userDto);
-            response.getWriter().write(String.format("All good :] \n%s", createdUser.toString()));
+            response.sendRedirect(String.format("/%s", request.getContextPath()));
         } catch (Exception e) {
             response.getWriter().write(String.format("Something wrong :< (%s)", e.getMessage()));
         }

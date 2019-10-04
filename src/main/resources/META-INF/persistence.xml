@@ -5,7 +5,8 @@
     <persistence-unit name="local-persistence" transaction-type="RESOURCE_LOCAL">
 
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL55Dialect"/>
+            <!--<property name="hibernate.hbm2ddl.auto" value="create"/>-->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="current_session_context_class" value="thread"/>

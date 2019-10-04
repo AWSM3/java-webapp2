@@ -3,6 +3,7 @@ package com.lanit.webapp2.entity;
 import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,6 +16,13 @@ public class User {
     private String middlename;
     private String lastname;
     private LocalDate birthdate;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "user",
+            fetch = FetchType.LAZY,
+            orphanRemoval = true
+    )
+    private List<Address> addresses;
 
     public User() {
 
@@ -90,5 +98,18 @@ public class User {
     public User setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
         return this;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public User setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+        return this;
+    }
+
+    public String getFullname() {
+        return String.format("%s %s %s (%s)", firstname, middlename, lastname, birthdate);
     }
 }

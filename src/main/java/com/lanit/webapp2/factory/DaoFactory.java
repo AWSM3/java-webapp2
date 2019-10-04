@@ -11,11 +11,10 @@ public class DaoFactory extends AbstractFactory {
         throw new UnsupportedOperationException();
     }
 
-    public Object build(Class daoClass) throws
+    public <T> T build(Class<T> daoClass) throws
             NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Constructor constructor = daoClass.getConstructor();
-        DaoInterface instance = (DaoInterface) constructor.newInstance();
 
-        return instance;
+        return (T) constructor.newInstance();
     }
 }
