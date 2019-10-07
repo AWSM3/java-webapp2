@@ -1,7 +1,6 @@
 package com.lanit.webapp2.dao;
 
 import com.lanit.webapp2.util.Hibernate;
-
 import javax.persistence.EntityManager;
 
 public class AbstractDao {
