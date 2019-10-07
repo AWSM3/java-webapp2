@@ -31,7 +31,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:if test="">
+                            <c:if test = "${not empty user.addresses}">
                                 <c:forEach items="${user.addresses}" var="address">
                                     <tr>
                                         <td>${address.street}</td>

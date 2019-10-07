@@ -11,22 +11,12 @@ public class Hibernate {
     private static final String PERSISTENCE_UNIT_NAME = "local-persistence";
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
 
-    private static EntityManager entityManager;
-
-    static {
-        createEntityManager();
-    }
-
-    private static EntityManager createEntityManager() {
+    public static EntityManager getEntityManager() {
         try {
-            return entityManager = entityManagerFactory.createEntityManager();
+            return entityManagerFactory.createEntityManager();
         } catch (Exception e) {
             System.err.println(String.format("Ошибка при инициализации менеджера сущностей Hibernate: %s", e.getMessage()));
             throw new ExceptionInInitializerError(e);
         }
-    }
-
-    public static EntityManager getEntityManager() {
-        return entityManager.isOpen() ? entityManager : createEntityManager();
     }
 }
