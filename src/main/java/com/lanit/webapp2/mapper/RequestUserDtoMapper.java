@@ -1,20 +1,19 @@
 package com.lanit.webapp2.mapper;
 
-import com.lanit.webapp2.dto.UserDto;
+import com.lanit.webapp2.dto.RequestUserDto;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class UserDtoMapper {
+public class RequestUserDtoMapper {
     public static final String PARAMETER_FIRSTNAME = "firstname";
     public static final String PARAMETER_MIDDLENAME = "middlename";
     public static final String PARAMETER_LASTNAME = "lastname";
     public static final String PARAMETER_BIRTHDATE = "birthdate";
 
-    public UserDto mapFromRequest(HttpServletRequest request) throws ParseException {
-        return new UserDto(
+    public RequestUserDto mapFromRequest(HttpServletRequest request) throws ParseException {
+        return new RequestUserDto(
             request.getParameter(PARAMETER_MIDDLENAME),
             request.getParameter(PARAMETER_MIDDLENAME),
             request.getParameter(PARAMETER_LASTNAME),

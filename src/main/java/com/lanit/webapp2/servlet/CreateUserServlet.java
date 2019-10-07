@@ -1,11 +1,9 @@
 package com.lanit.webapp2.servlet;
 
 import com.lanit.webapp2.dao.UserDao;
-import com.lanit.webapp2.dto.UserDto;
+import com.lanit.webapp2.dto.RequestUserDto;
 import com.lanit.webapp2.entity.User;
-import com.lanit.webapp2.factory.DaoFactory;
-import com.lanit.webapp2.mapper.UserDtoMapper;
-import com.lanit.webapp2.dao.UserDaoInterface;
+import com.lanit.webapp2.mapper.RequestUserDtoMapper;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,21 +16,18 @@ import java.io.IOException;
 public class CreateUserServlet extends HttpServlet {
     public static final String URL = "/user/create";
 
-    private DaoFactory daoFactory;
-    private UserDtoMapper userDtoMapper;
+    private RequestUserDtoMapper requestUserDtoMapper;
 
     @Override
     public void init() throws ServletException {
-        this.daoFactory = (DaoFactory) getServletContext().getAttribute(DaoFactory.class.getSimpleName());
-        this.userDtoMapper = (UserDtoMapper) getServletContext().getAttribute(UserDtoMapper.class.getSimpleName());
+        this.requestUserDtoMapper = (RequestUserDtoMapper) getServletContext().getAttribute(RequestUserDtoMapper.class.getSimpleName());
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            UserDto userDto = this.userDtoMapper.mapFromRequest(request);
-            UserDao dao = daoFactory.build(UserDao.class);
-            User createdUser = dao.create(userDto);
+            RequestUserDto requestUserDto = this.requestUserDtoMapper.mapFromRequest(request);
+            User createdUser = UserDao.getInstance().create(requestUserDto);
             response.sendRedirect(String.format("/%s", request.getContextPath()));
         } catch (Exception e) {
             response.getWriter().write(String.format("Something wrong :< (%s)", e.getMessage()));

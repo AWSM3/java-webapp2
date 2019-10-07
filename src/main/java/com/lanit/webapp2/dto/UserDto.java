@@ -1,33 +1,33 @@
 package com.lanit.webapp2.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserDto {
-    private String firstname;
-    private String middlename;
-    private String lastname;
-    private LocalDate birthdate;
+    private final String fullname;
+    private final LocalDate birthdate;
+    private List<AddressDto> addresses;
 
-    public UserDto(String firstname, String middlename, String lastname, LocalDate birthdate) {
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
+    public UserDto(String fullname, LocalDate birthdate) {
+        this.fullname = fullname;
         this.birthdate = birthdate;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public String getLastname() {
-        return lastname;
+    public String getFullname() {
+        return fullname;
     }
 
     public LocalDate getBirthdate() {
         return birthdate;
+    }
+
+    public List<AddressDto> getAddresses() {
+        return addresses;
+    }
+
+    public UserDto setAddresses(List<AddressDto> addresses) {
+        this.addresses = addresses;
+
+        return this;
     }
 }

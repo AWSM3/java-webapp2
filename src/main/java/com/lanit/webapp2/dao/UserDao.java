@@ -1,6 +1,6 @@
 package com.lanit.webapp2.dao;
 
-import com.lanit.webapp2.dto.UserDto;
+import com.lanit.webapp2.dto.RequestUserDto;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveUserException;
 import com.lanit.webapp2.exception.UserNotFoundException;
@@ -14,9 +14,17 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserDao extends AbstractDao implements UserDaoInterface {
+    private static UserDao instance = new UserDao();
+
+    protected UserDao() {}
+
+    public static UserDao getInstance() {
+        return instance;
+    }
+
     @Override
-    public User create(UserDto userDto) throws FailedToSaveUserException {
-        User user = new User(userDto.getFirstname(), userDto.getMiddlename(), userDto.getLastname(), userDto.getBirthdate());
+    public User create(RequestUserDto requestUserDto) throws FailedToSaveUserException {
+        User user = new User(requestUserDto.getFirstname(), requestUserDto.getMiddlename(), requestUserDto.getLastname(), requestUserDto.getBirthdate());
         try {
             insertRow(user);
         } catch (Exception e) {

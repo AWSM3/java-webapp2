@@ -1,13 +1,21 @@
 package com.lanit.webapp2.dao;
 
-import com.lanit.webapp2.dto.AddressDto;
+import com.lanit.webapp2.dto.RequestAddressDto;
 import com.lanit.webapp2.entity.Address;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveAddressException;
 
 public class AddressDao extends AbstractDao {
-    public Address create(AddressDto addressDto, User user) throws FailedToSaveAddressException {
-        Address address = new Address(addressDto.getStreet(), addressDto.getBuilding(), addressDto.getApartments());
+    private static AddressDao instance = new AddressDao();
+
+    protected AddressDao() {}
+
+    public static AddressDao getInstance() {
+        return instance;
+    }
+
+    public Address create(RequestAddressDto requestAddressDto, User user) throws FailedToSaveAddressException {
+        Address address = new Address(requestAddressDto.getStreet(), requestAddressDto.getBuilding(), requestAddressDto.getApartments());
         address.setUser(user);
 
         try {

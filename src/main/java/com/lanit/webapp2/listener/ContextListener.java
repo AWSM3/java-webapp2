@@ -1,11 +1,9 @@
 package com.lanit.webapp2.listener;
 
-import com.lanit.webapp2.factory.DaoFactory;
 import com.lanit.webapp2.factory.DatabaseConnectionFactory;
 import com.lanit.webapp2.factory.FactoryInterface;
-import com.lanit.webapp2.mapper.AddressDtoMapper;
-import com.lanit.webapp2.mapper.UserDtoMapper;
-import com.lanit.webapp2.dao.UserDaoInterface;
+import com.lanit.webapp2.mapper.RequestAddressDtoMapper;
+import com.lanit.webapp2.mapper.RequestUserDtoMapper;
 import com.lanit.webapp2.util.DatabaseMigration;
 
 import javax.servlet.ServletContext;
@@ -40,12 +38,10 @@ public class ContextListener implements ServletContextListener {
             ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         /** коннект к бд */
         context.setAttribute(Connection.class.getSimpleName(), getFactory(DatabaseConnectionFactory.class, context).build());
-        /** dao фабрика */
-        context.setAttribute(DaoFactory.class.getSimpleName(), getFactory(DaoFactory.class, context));
         /** маппер юзеров */
-        context.setAttribute(UserDtoMapper.class.getSimpleName(), new UserDtoMapper());
+        context.setAttribute(RequestUserDtoMapper.class.getSimpleName(), new RequestUserDtoMapper());
         /** маппер адресов */
-        context.setAttribute(AddressDtoMapper.class.getSimpleName(), new AddressDtoMapper());
+        context.setAttribute(RequestAddressDtoMapper.class.getSimpleName(), new RequestAddressDtoMapper());
     }
 
     private void setupDatabase() throws FileNotFoundException, SQLException {

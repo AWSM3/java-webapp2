@@ -1,5 +1,5 @@
 <%@ page import="com.lanit.webapp2.servlet.CreateUserServlet" %>
-<%@ page import="com.lanit.webapp2.mapper.UserDtoMapper" %>
+<%@ page import="com.lanit.webapp2.mapper.RequestUserDtoMapper" %>
 
 <jsp:include page="partials/head.jsp"/>
 
@@ -11,28 +11,28 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Firstname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" required name="<%= UserDtoMapper.PARAMETER_FIRSTNAME %>">
+                <input type="text" class="form-control" required name="<%= RequestUserDtoMapper.PARAMETER_FIRSTNAME %>">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Middlename</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" required name="<%= UserDtoMapper.PARAMETER_MIDDLENAME %>">
+                <input type="text" class="form-control" required name="<%= RequestUserDtoMapper.PARAMETER_MIDDLENAME %>">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Lastname</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" required name="<%= UserDtoMapper.PARAMETER_LASTNAME %>">
+                <input type="text" class="form-control" required name="<%= RequestUserDtoMapper.PARAMETER_LASTNAME %>">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date of birth</label>
             <div class="col-sm-10">
-                <input type="date" class="form-control" required name="<%= UserDtoMapper.PARAMETER_BIRTHDATE %>">
+                <input type="date" class="form-control" required name="<%= RequestUserDtoMapper.PARAMETER_BIRTHDATE %>">
             </div>
         </div>
 

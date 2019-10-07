@@ -1,5 +1,5 @@
 <%@ page import="com.lanit.webapp2.servlet.CreateUserServlet" %>
-<%@ page import="com.lanit.webapp2.mapper.UserDtoMapper" %>
+<%@ page import="com.lanit.webapp2.mapper.RequestUserDtoMapper" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page isELIgnored="false" %>
 
@@ -31,13 +31,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${user.addresses}" var="address">
-                                <tr>
-                                    <td>${address.street}</td>
-                                    <td>${address.building}</td>
-                                    <td>${address.apartments}</td>
-                                </tr>
-                            </c:forEach>
+                            <c:if test="">
+                                <c:forEach items="${user.addresses}" var="address">
+                                    <tr>
+                                        <td>${address.street}</td>
+                                        <td>${address.building}</td>
+                                        <td>${address.apartments}</td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
                             </tbody>
                         </table>
                     </div>
