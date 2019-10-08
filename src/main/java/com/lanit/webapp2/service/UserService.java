@@ -9,8 +9,16 @@ import com.lanit.webapp2.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetUsersList {
-    public List<UserDto> invoke() {
+public class UserService {
+    protected static UserService instance = new UserService();
+
+    protected UserService() {}
+
+    public static UserService getInstance() {
+        return instance;
+    }
+
+    public List<UserDto> getUsersList() {
         List<User> users = UserDao.getInstance().getListWithFetchingLazy(); // todo: pagination
         List<UserDto> list = new ArrayList<>();
 
