@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserService {
-    protected static UserService instance = new UserService();
+    protected static final UserService instance = new UserService();
 
     protected UserService() {}
 
