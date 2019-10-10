@@ -1,4 +1,4 @@
-<%@ page import="com.lanit.webapp2.servlet.CreateUserServlet" %>
+<%@ page import="com.lanit.webapp2.controller.CreateUserController" %>
 <%@ page import="com.lanit.webapp2.mapper.RequestUserDtoMapper" %>
 
 <jsp:include page="partials/head.jsp"/>
@@ -7,7 +7,7 @@
     <h1 class="display-4">Creating user form</h1>
     <hr>
 
-    <form method="POST" action="<%= CreateUserServlet.URL %>">
+    <form method="POST" action="<%= CreateUserController.URL %>">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Firstname</label>
             <div class="col-sm-10">

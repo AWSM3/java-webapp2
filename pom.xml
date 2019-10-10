@@ -26,9 +26,28 @@
         <hibernate-entitymanager.version>5.0.12.Final</hibernate-entitymanager.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
         <jaxb-runtime.version>2.3.1</jaxb-runtime.version>
+        <spring-global.version>5.0.7.RELEASE</spring-global.version>
     </properties>
 
     <dependencies>
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-global.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-global.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-global.version}</version>
+        </dependency>
+
+        <!-- JSTL -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>

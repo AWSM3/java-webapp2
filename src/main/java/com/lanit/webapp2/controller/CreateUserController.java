@@ -1,30 +1,29 @@
-package com.lanit.webapp2.servlet;
+package com.lanit.webapp2.controller;
 
 import com.lanit.webapp2.dao.UserDao;
 import com.lanit.webapp2.dto.RequestUserDto;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.mapper.RequestUserDtoMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {CreateUserServlet.URL})
-public class CreateUserServlet extends HttpServlet {
+@Controller
+public class CreateUserController {
     public static final String URL = "/user/create";
 
     private RequestUserDtoMapper requestUserDtoMapper;
 
-    @Override
-    public void init() throws ServletException {
-        this.requestUserDtoMapper = (RequestUserDtoMapper) getServletContext().getAttribute(RequestUserDtoMapper.class.getSimpleName());
+    public CreateUserController(RequestUserDtoMapper requestUserDtoMapper) {
+        this.requestUserDtoMapper = requestUserDtoMapper;
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @PostMapping(URL)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             RequestUserDto requestUserDto = this.requestUserDtoMapper.mapFromRequest(request);
             User createdUser = UserDao.getInstance().create(requestUserDto);

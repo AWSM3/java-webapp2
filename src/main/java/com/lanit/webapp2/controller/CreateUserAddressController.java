@@ -1,31 +1,29 @@
-package com.lanit.webapp2.servlet;
+package com.lanit.webapp2.controller;
 
 import com.lanit.webapp2.dao.AddressDao;
 import com.lanit.webapp2.dao.UserDao;
 import com.lanit.webapp2.dto.RequestAddressDto;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.mapper.RequestAddressDtoMapper;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {CreateUserAddressServlet.URL})
-public class CreateUserAddressServlet extends HttpServlet {
+@Controller
+public class CreateUserAddressController {
     public static final String URL = "/create/user/address";
-
     private RequestAddressDtoMapper requestAddressDtoMapper;
 
-    @Override
-    public void init() throws ServletException {
-        this.requestAddressDtoMapper = (RequestAddressDtoMapper) getServletContext().getAttribute(RequestAddressDtoMapper.class.getSimpleName());
+    public CreateUserAddressController(RequestAddressDtoMapper requestAddressDtoMapper) {
+        this.requestAddressDtoMapper = requestAddressDtoMapper;
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @GetMapping(URL)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             request.setAttribute("users", UserDao.getInstance().getList());
             request.getRequestDispatcher("/address-add.jsp").forward(request, response);
@@ -34,8 +32,8 @@ public class CreateUserAddressServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @PostMapping(URL)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             RequestAddressDto requestAddressDto = requestAddressDtoMapper.mapFromRequest(request);
             User user = UserDao.getInstance().get(requestAddressDto.getUserId());

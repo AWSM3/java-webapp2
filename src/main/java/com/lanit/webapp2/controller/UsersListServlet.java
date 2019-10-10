@@ -1,18 +1,17 @@
-package com.lanit.webapp2.servlet;
+package com.lanit.webapp2.controller;
 
 import com.lanit.webapp2.service.UserService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/"})
-public class UsersListServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+@Controller
+public class UsersListServlet {
+    @GetMapping("/")
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             request.setAttribute("users",  UserService.getInstance().getUsersList());
             request.getRequestDispatcher("/users-list.jsp").forward(request, response);

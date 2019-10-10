@@ -1,9 +1,11 @@
 package com.lanit.webapp2.mapper;
 
 import com.lanit.webapp2.dto.RequestAddressDto;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Component
 public class RequestAddressDtoMapper {
     public static final String PARAMETER_STREET = "street";
     public static final String PARAMETER_BUILDING = "building";
