@@ -10,10 +10,16 @@ import java.io.IOException;
 
 @Controller
 public class UsersListServlet {
+    private UserService userService;
+
+    public UsersListServlet(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/")
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            request.setAttribute("users",  UserService.getInstance().getUsersList());
+            request.setAttribute("users", userService.getUsersList());
             request.getRequestDispatcher("/users-list.jsp").forward(request, response);
         } catch (Exception e) {
             response.getWriter().write(String.format("Something wrong :< (%s)", e.getMessage()));

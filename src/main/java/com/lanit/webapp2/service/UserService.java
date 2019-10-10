@@ -5,21 +5,24 @@ import com.lanit.webapp2.dto.AddressDto;
 import com.lanit.webapp2.dto.UserDto;
 import com.lanit.webapp2.entity.Address;
 import com.lanit.webapp2.entity.User;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserService {
-    protected static final UserService instance = new UserService();
+    protected UserDao userDao;
 
-    protected UserService() {}
-
-    public static UserService getInstance() {
-        return instance;
+    public UserService(UserDao userDao) {
+        this.userDao = userDao;
     }
 
     public List<UserDto> getUsersList() {
-        List<User> users = UserDao.getInstance().getListWithFetchingLazy(); // todo: pagination
+        List<User> users = userDao.getListWithFetchingLazy(); // todo: pagination
         List<UserDto> list = new ArrayList<>();
 
         for (User user : users) {

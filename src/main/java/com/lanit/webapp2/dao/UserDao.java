@@ -4,6 +4,9 @@ import com.lanit.webapp2.dto.RequestUserDto;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveUserException;
 import com.lanit.webapp2.exception.UserNotFoundException;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,15 +17,9 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 import java.util.UUID;
 
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserDao extends AbstractDao implements UserDaoInterface {
-    private static UserDao instance = new UserDao();
-
-    protected UserDao() {}
-
-    public static UserDao getInstance() {
-        return instance;
-    }
-
     @Override
     public User create(RequestUserDto requestUserDto) throws FailedToSaveUserException {
         User user = new User(requestUserDto.getFirstname(), requestUserDto.getMiddlename(), requestUserDto.getLastname(), requestUserDto.getBirthdate());
@@ -71,6 +68,7 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> rootEntry = criteriaQuery.from(User.class);
             rootEntry.fetch("addresses", JoinType.LEFT);
+            criteriaQuery.distinct(true);
             criteriaQuery.select(rootEntry);
 
             return em.createQuery(criteriaQuery).getResultList();

@@ -1,11 +1,14 @@
 package com.lanit.webapp2.mapper;
 
 import com.lanit.webapp2.dto.RequestAddressDto;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class RequestAddressDtoMapper {
     public static final String PARAMETER_STREET = "street";
     public static final String PARAMETER_BUILDING = "building";

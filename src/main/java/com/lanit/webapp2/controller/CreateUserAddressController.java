@@ -16,16 +16,21 @@ import java.io.IOException;
 @Controller
 public class CreateUserAddressController {
     public static final String URL = "/create/user/address";
-    private RequestAddressDtoMapper requestAddressDtoMapper;
 
-    public CreateUserAddressController(RequestAddressDtoMapper requestAddressDtoMapper) {
+    private RequestAddressDtoMapper requestAddressDtoMapper;
+    private UserDao userDao;
+    private AddressDao addressDao;
+
+    public CreateUserAddressController(RequestAddressDtoMapper requestAddressDtoMapper, UserDao userDao, AddressDao addressDao) {
         this.requestAddressDtoMapper = requestAddressDtoMapper;
+        this.userDao = userDao;
+        this.addressDao = addressDao;
     }
 
     @GetMapping(URL)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
-            request.setAttribute("users", UserDao.getInstance().getList());
+            request.setAttribute("users", userDao.getList());
             request.getRequestDispatcher("/address-add.jsp").forward(request, response);
         } catch (Exception e) {
             response.getWriter().write(String.format("Something wrong :< (%s)", e.getMessage()));
@@ -36,8 +41,8 @@ public class CreateUserAddressController {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             RequestAddressDto requestAddressDto = requestAddressDtoMapper.mapFromRequest(request);
-            User user = UserDao.getInstance().get(requestAddressDto.getUserId());
-            AddressDao.getInstance().create(requestAddressDto, user);
+            User user = userDao.get(requestAddressDto.getUserId());
+            addressDao.create(requestAddressDto, user);
             response.sendRedirect(String.format("/%s", request.getContextPath()));
         } catch (Exception e) {
             response.getWriter().write(String.format("Something wrong :< (%s)", e.getMessage()));
