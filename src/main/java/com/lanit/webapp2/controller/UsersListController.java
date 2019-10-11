@@ -4,6 +4,7 @@ import com.lanit.webapp2.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +19,9 @@ public class UsersListController {
     }
 
     @GetMapping("/")
-    protected String doGet(Model model) throws IOException {
+    protected ModelAndView doGet(Model model) throws IOException {
         model.addAttribute("users", userService.getUsersList());
 
-        return "/users-list";
+        return new ModelAndView("/users-list");
     }
 }
