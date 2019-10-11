@@ -8,13 +8,6 @@ import javax.servlet.ServletException;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        super.onStartup(servletContext);
-
-        DatabaseMigration.getInstance().migrate();
-    }
-
-    @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{RootConfig.class};
     }

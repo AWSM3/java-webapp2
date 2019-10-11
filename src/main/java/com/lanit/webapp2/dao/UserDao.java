@@ -5,22 +5,23 @@ import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveUserException;
 import com.lanit.webapp2.exception.UserNotFoundException;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserDao extends AbstractDao implements UserDaoInterface {
     @Override
+    @Transactional
     public User create(RequestUserDto requestUserDto) throws FailedToSaveUserException {
         User user = new User(requestUserDto.getFirstname(), requestUserDto.getMiddlename(), requestUserDto.getLastname(), requestUserDto.getBirthdate());
         try {
@@ -33,8 +34,8 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
         return user;
     }
 
+    @Override
     public User get(String userId) throws UserNotFoundException {
-        EntityManager em = getEntityManager();
         try {
             User user = em.find(User.class, UUID.fromString(userId));
             if (null == user) {
@@ -47,8 +48,8 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
         }
     }
 
+    @Override
     public List<User> getList() {
-        EntityManager em = getEntityManager();
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
@@ -61,8 +62,8 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
         }
     }
 
+    @Override
     public List<User> getListWithFetchingLazy() {
-        EntityManager em = getEntityManager();
         try {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);

@@ -14,7 +14,7 @@
             <label class="col-sm-2 col-form-label">User</label>
             <div class="col-sm-10">
                 <select class="form-control" required name="<%= RequestAddressDtoMapper.PARAMETER_USER_ID %>">
-                    <c:forEach items="${requestScope.users}" var="user">
+                    <c:forEach items="${users}" var="user">
                         <option value="${user.id}">${user.fullname}</option>
                     </c:forEach>
                 </select>

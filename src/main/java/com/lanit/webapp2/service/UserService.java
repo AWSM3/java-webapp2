@@ -1,23 +1,20 @@
 package com.lanit.webapp2.service;
 
-import com.lanit.webapp2.dao.UserDao;
+import com.lanit.webapp2.dao.UserDaoInterface;
 import com.lanit.webapp2.dto.AddressDto;
 import com.lanit.webapp2.dto.UserDto;
 import com.lanit.webapp2.entity.Address;
 import com.lanit.webapp2.entity.User;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class UserService {
-    protected UserDao userDao;
+    protected UserDaoInterface userDao;
 
-    public UserService(UserDao userDao) {
+    public UserService(UserDaoInterface userDao) {
         this.userDao = userDao;
     }
 

@@ -1,6 +1,7 @@
 package com.lanit.webapp2.util;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -10,25 +11,12 @@ import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class DatabaseMigration {
-    protected static DatabaseMigration instance = new DatabaseMigration();
-
-    protected DatabaseMigration() {}
-
-    public static DatabaseMigration getInstance() {
-        return instance;
-    }
+    @PersistenceContext
+    protected EntityManager em;
 
     public void migrate() {
-        EntityManager em = Hibernate.getEntityManager();
-        em.getTransaction().begin();
-        try {
-            Query query = em.createNativeQuery(getSql());
-            query.executeUpdate();
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw e;
-        }
-        em.getTransaction().commit();
+        Query query = em.createNativeQuery(getSql());
+        query.executeUpdate();
     }
 
     private static String getSql() {

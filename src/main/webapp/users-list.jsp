@@ -10,7 +10,7 @@
     <hr>
 
     <div class="accordion" id="accordionExample">
-        <c:forEach items="${requestScope.users}" var="user">
+        <c:forEach items="${users}" var="user">
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
