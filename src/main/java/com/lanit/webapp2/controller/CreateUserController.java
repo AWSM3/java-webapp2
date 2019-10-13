@@ -27,8 +27,13 @@ public class CreateUserController {
     }
 
     @PostMapping(URL)
-    protected RedirectView doPost(@RequestParam Map<String, String> requestParams) throws IOException, FailedToSaveUserException, ParseException {
-        RequestUserDto requestUserDto = requestUserDtoMapper.mapFromRequestParams(requestParams);
+    protected RedirectView doPost(
+            @RequestParam String firstname,
+            @RequestParam String middlename,
+            @RequestParam String lastname,
+            @RequestParam String birthdate
+    ) throws IOException, FailedToSaveUserException, ParseException {
+        RequestUserDto requestUserDto = requestUserDtoMapper.mapFromParams(firstname, middlename, lastname, birthdate);
         User createdUser = userDao.create(requestUserDto);
 
         return new RedirectView("/");

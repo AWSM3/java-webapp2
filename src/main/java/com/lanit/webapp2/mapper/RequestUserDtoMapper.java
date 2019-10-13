@@ -16,12 +16,7 @@ public class RequestUserDtoMapper {
     public static final String PARAMETER_LASTNAME = "lastname";
     public static final String PARAMETER_BIRTHDATE = "birthdate";
 
-    public RequestUserDto mapFromRequestParams(Map<String, String> requestParams) throws ParseException {
-        return new RequestUserDto(
-                (String) requestParams.get(PARAMETER_MIDDLENAME),
-                (String) requestParams.get(PARAMETER_MIDDLENAME),
-                (String) requestParams.get(PARAMETER_LASTNAME),
-                LocalDate.parse((String) requestParams.get(PARAMETER_BIRTHDATE))
-        );
+    public RequestUserDto mapFromParams(String firstname, String middlename, String lastname, String birthdate) throws ParseException {
+        return new RequestUserDto(firstname, middlename, lastname, LocalDate.parse(birthdate));
     }
 }
