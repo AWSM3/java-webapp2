@@ -1,10 +1,8 @@
 package com.lanit.webapp2.mapper;
 
 import com.lanit.webapp2.dto.RequestAddressDto;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Component

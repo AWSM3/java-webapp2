@@ -12,7 +12,6 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Map;
 
 @Controller
 public class CreateUserController {

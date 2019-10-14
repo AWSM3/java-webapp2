@@ -2,7 +2,6 @@ package com.lanit.webapp2.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 public class AbstractDao {
     @PersistenceContext

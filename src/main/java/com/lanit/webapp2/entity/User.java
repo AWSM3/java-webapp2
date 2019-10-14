@@ -1,6 +1,7 @@
 package com.lanit.webapp2.entity;
 
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;

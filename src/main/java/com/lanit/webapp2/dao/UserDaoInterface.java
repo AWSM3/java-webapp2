@@ -13,6 +13,4 @@ public interface UserDaoInterface extends DaoInterface {
     public User get(String userId) throws UserNotFoundException;
 
     public List<User> getList();
-
-    public List<User> getListWithFetchingLazy();
 }

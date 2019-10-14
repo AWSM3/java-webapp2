@@ -4,7 +4,6 @@ import com.lanit.webapp2.dto.RequestAddressDto;
 import com.lanit.webapp2.entity.Address;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveAddressException;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;

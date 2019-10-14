@@ -4,15 +4,10 @@ import com.lanit.webapp2.dto.RequestUserDto;
 import com.lanit.webapp2.entity.User;
 import com.lanit.webapp2.exception.FailedToSaveUserException;
 import com.lanit.webapp2.exception.UserNotFoundException;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
@@ -54,22 +49,6 @@ public class UserDao extends AbstractDao implements UserDaoInterface {
             CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
             CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
             Root<User> rootEntry = criteriaQuery.from(User.class);
-            criteriaQuery.select(rootEntry);
-
-            return em.createQuery(criteriaQuery).getResultList();
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public List<User> getListWithFetchingLazy() {
-        try {
-            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-            CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
-            Root<User> rootEntry = criteriaQuery.from(User.class);
-            rootEntry.fetch("addresses", JoinType.LEFT);
-            criteriaQuery.distinct(true);
             criteriaQuery.select(rootEntry);
 
             return em.createQuery(criteriaQuery).getResultList();
