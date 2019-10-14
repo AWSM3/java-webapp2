@@ -7,6 +7,7 @@ import com.lanit.webapp2.entity.Address;
 import com.lanit.webapp2.entity.User;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,9 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    @Transactional
     public List<UserDto> getUsersList() {
-        List<User> users = userDao.getListWithFetchingLazy(); // todo: pagination
+        List<User> users = userDao.getList(); // todo: pagination
         List<UserDto> list = new ArrayList<>();
 
         for (User user : users) {
@@ -32,6 +34,7 @@ public class UserService {
             userDto.setAddresses(addressesList);
             list.add(userDto);
         }
+
         return list;
     }
 }
