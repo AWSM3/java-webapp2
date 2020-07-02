@@ -21,7 +21,7 @@
         <jsp-api.version>2.0</jsp-api.version>
         <junit.version>4.11</junit.version>
         <jstl.version>1.2</jstl.version>
-        <mysql-connector.version>5.1.6</mysql-connector.version>
+        <mysql-connector.version>8.0.16</mysql-connector.version>
         <hibernate-core.version>5.2.17.Final</hibernate-core.version>
         <hibernate-entitymanager.version>5.0.12.Final</hibernate-entitymanager.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
