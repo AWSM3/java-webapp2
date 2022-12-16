@@ -26,7 +26,7 @@
         <hibernate-entitymanager.version>5.0.12.Final</hibernate-entitymanager.version>
         <jaxb-api.version>2.3.0</jaxb-api.version>
         <jaxb-runtime.version>2.3.1</jaxb-runtime.version>
-        <spring-global.version>5.0.7.RELEASE</spring-global.version>
+        <spring-global.version>5.2.20.RELEASE</spring-global.version>
     </properties>
 
     <dependencies>
